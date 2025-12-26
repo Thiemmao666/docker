@@ -1,0 +1,48 @@
+Hệ thống mạng của Docker
+1.	Hệ thống Network của Docker hoạt động thế nào?
+•	Mỗi docker kết nối với một mạng ảo dạng bridge
+•	Mỗi mạng ảo sau đó được NAT ra IP của host OS
+•	Mỗi container được kết nối trực tiếp, ngang hàng với nhau
+•	Có thể tạo virtual network riêng cho mỗi lớp ứng dụng
+•	Một container có thể kết nối đến nhiều virtual network khác nhau
+•	Container cũng có thể kết nối trực tiếp với dải mạng của host 
+•	Có nhiều loại (driver) virtual network cho những mục đích khác nhau (bridge, overlay,…)
+
+thang@thang:~$ docker network ls  show networks
+NETWORK ID     NAME                  	DRIVER    	SCOPE
+4afa66347393   application_default   	bridge   	local
+1e86028d95e4   bridge                		bridge    	local
+92801ad355fd    host                 		host      		local
+fe826d58105f     none                  		null      		local
+
+Driver: loại kết nối mạng  bridge là mạng mặc định
+thang@thang:~$ docker network inspect bridge  cấu hình của network tên bridge (dạng JSON)
+thang@thang:~$ docker network create –driver  tạo network
+thang@thang:~$ docker network connect  Kết nối network vào container
+thang@thang:~$ docker network disconnect my_db_net test-nginx  Bỏ kết nối network vào container
+
+2.	Cách các container giao tiếp với nhau bằng tên
+•	Container không nói chuyện với nhau bằng IP mà bằng tên (--name) (bản chất vẫn là Ip vì DNS sẽ ánh xạ từ tên  địa chỉ IP. Lý do dùng tên là vì địa chỉ IP có thể bị thay đổi trong quá trình xoá, bật tắt container)
+•	DNS là chức năng có sẵn của hệ thống khi container được tạo ra và kết nối với custom network
+•	Sử dụng –network-alias để đặt tên alias cho một container (load balancing ở mức dns)
+•	docker container run --name nginx1 -d --network-alias webserver --network my_db_net nginx
+•	docker container run --name nginx2 -d --network-alias webserver --network my_db_net nginx
+•	docker container run --name nginx3 -d --network-alias webserver --network my_db_net nginx
+
+•	[root@97a129ab05a9 /]# ping webserver
+PING webserver (172.18.0.4) 56(84) bytes of data.
+64 bytes from nginx1.my_db_net (172.18.0.4): icmp_seq=1 ttl=64 time=0.036 ms
+64 bytes from nginx1.my_db_net (172.18.0.4): icmp_seq=2 ttl=64 time=0.049 ms
+64 bytes from nginx1.my_db_net (172.18.0.4): icmp_seq=3 ttl=64 time=0.053 ms
+64 bytes from nginx1.my_db_net (172.18.0.4): icmp_seq=4 ttl=64 time=0.053 ms
+^C
+--- webserver ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3107ms
+rtt min/avg/max/mdev = 0.036/0.047/0.053/0.010 ms
+[root@97a129ab05a9 /]# ping webserver
+PING webserver (172.18.0.5) 56(84) bytes of data.
+64 bytes from nginx2.my_db_net (172.18.0.5): icmp_seq=1 ttl=64 time=0.036 ms
+64 bytes from nginx2.my_db_net (172.18.0.5): icmp_seq=2 ttl=64 time=0.051 ms
+64 bytes from nginx2.my_db_net (172.18.0.5): icmp_seq=3 ttl=64 time=0.051 ms
+64 bytes from nginx2.my_db_net (172.18.0.5): icmp_seq=4 ttl=64 time=0.052 ms
+^X64 bytes from nginx2.my_db_net (172.18.0.5): icmp_seq=5 ttl=64 time=0.051 ms
