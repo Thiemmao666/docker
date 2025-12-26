@@ -1,0 +1,8 @@
+Tự động hoá trong môi trường Container – Docker Compose
+1.	Vì sao cần tự động hoá
+-	Môi trường có nhiều container
+-	Chuẩn hoá môi trường
+-	Mô tả lại toàn hệ thống trong 1 file
+2.	Cách sử dụng
+-	File mô tả bằng YAML
+-	CLI docker-compose
