@@ -1,0 +1,49 @@
+Docker Image
+1.	What is Docker Image?
+•	A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
+•	There are two important principles of images:
+•	Images are immutable. Once an image is created, it can't be modified. You can only make a new image or add changes on top of it.
+•	Container images are composed of layers. Each layer represents a set of file system changes that add, remove, or modify files.
+•	Pull, push image
+•	Note
+	App binary và dependency
+	Metadata về việc khởi tạo một container
+	Không phải 1 OS image, chỉ gồm các thành phần cần thiết để chạy ứng dụng
+	Lưu trữ, chia sẻ, sử dụng image qua registry (vd như docker hub)
+	Image được tạo từ DockerFile (DockerFile là 1 file cấu hình mô tả image hoạt động thế nào)
+	How to create an image??
+•	Trong mỗi image, sử dụng 1 base image, vd như nginx, thêm vào đó các source code rồi push lại lên docker hub.
+
+2.	Có những gì bên trong 1 image?
+•	Image được tạo thành bởi nhiều Layers:
+
+
+
+•	Mỗi layer chỉ được lưu một lần trên host
+	Tiết kiệm bộ nhớ
+	Tiết kiệm thời gian pull/push
+•	Container là một layer của image
+•	Kiểm tra bằng docker image inspect & docker image history
+
+3.	Cách dùng image tag và DockerHub
+4.	Docker file
+•	Tạo ra image cho riêng mình với DockerFile
+ 
+•	Docker builds images by reading the instructions from a Dockerfile. A Dockerfile is a text file containing instructions for building your source code.
+•	Dockerfile sẽ gồm những lệnh sau:
+	FROM - chỉ định base image. Base image thông thường sẽ được lấy từ Docker Hub - nơi lưu trữ và chia sẻ các image mà từ đó bạn có thể lấy về và tùy chỉnh
+	RUN - dùng để thực thi một command bất kỳ trong quá trình build image, thường thì nó được dùng để build các package trong image
+	CMD - dùng để thực thi một command bất kỳ trong quá trình chạy container. CMD sẽ không thực thi bất cứ thứ gì trong quá trính build image và mỗi Dockerfile chỉ chứa duy nhất một lệnh CMD
+	LABEL - dùng để cung cấp metadata cho image, nơi tốt để chứa các thông tin về tác giả, các lưu ý...
+	EXPOSE - thiết lập port để truy cập tới container sau khi đã khởi chạy
+	ENV - thiết lập các biến môi trường để sử dụng cho các câu lệnh trong quá trình build
+	ADD và COPY- sao chép file, thư mục vào container
+	ENTRYPOINT - cung cấp một số lệnh mặc định cùng tham số khi thực thi container
+	VOLUME - tạo một folder dùng để truy cập và lưu trữ dữ liệu, folder được liên kết từ máy host và container
+	USER - dùng để chỉ định username hoặc UID được sử dụng trong quá trình tạo image cho các lệnh RUN, CMD và ENTRYPOINT
+	WORKDIR - Thiết lập thư mục làm việc trong container cho các lệnh COPY, ADD, RUN, CMD, và ENTRYPOINT
+	ARG - Định nghĩa các biến để sử dụng trong build-time.
+	ONBUILD - tạo một trigger cho image để thực thi khi nó được sử dụng làm base image cho việc build một image khác
+	STOPSIGNAL- chỉ định kí hiệu hệ thống dùng để stop container.
+	HEALTHCHECK - cung cấp phương thức cho Docker để kiểm tra container có hoạt động bình thường hay không.
+	SHELL - dùng để thay đổi các lệnh shell mặc định
