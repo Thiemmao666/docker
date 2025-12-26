@@ -1,0 +1,26 @@
+Container trên cluster
+1.	Container everywhere
+-	Làm sao triển khai tự động hoá triển khai container
+-	Scale out/in/up/down
+-	Đảm bảo container tự khôi phục khi lỗi?
+-	Thay thế container vẫn đảm bảo hệ thống online
+-	Kiểm soát và quản lý vòng đời của container
+-	Mạng liên thông giữa các host (node)
+2.	Swarm Orchestrator
+-	Clustering
+-	Bộ command:
+o	Docker swarm
+	Docker swarm init: tạo ra node đầu tiên chạy docker swarm
+o	Docker node: liệt kê các host vật lý, các node bên dưới
+	Docker node ls
+o	Docker service: 
+	Object service trong docker swarm: một cái ứng dụng > container. Trong một ứng dụng có thể có nhiều container. Mỗi container trong docker swarm là 1 task
+o	Docker stack
+o	Docker secret
+ 
+3.	Overlay Network
+ 
+-	VIP: VirtualIPs
+4.	Docker stack
+-	Docker stack deploy
+-	Stack quản lý tất cả các object và tất cả node trong swarm
