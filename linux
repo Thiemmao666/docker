@@ -1,0 +1,113 @@
+nstall & Booting Linux system	
+Documents:
+
+Linux Fundamentals: http://linux-training.be/linuxfun.pdf
+Linux system administration: http://linux-training.be/linuxsys.pdf
+Linux Storage: http://linux-training.be/linuxsto.pdf
+Linux Security: http://linux-training.be/linuxsec.pdf
+Linux Networking: http://linux-training.be/linuxnet.pdf
+ 
+Course:
+
+For beginner to power user: Link
+For get Linux System Administrator Certificate LPIC-1: Link
+
+
+Install successfully a virtual machines (VM) Ubuntu on Vbox
+With firstly user is "adm1n"
+1/2 day	
+File management and bash script	
+Use Vi and Nano to compose a paragraph at least 15 lines, fast go to an line, fast find a string in the paragraph and create a text file
+Grant owner full permission, other read-only
+Change file owner
+Find files that size are larger 20 MB
+Write a bash file to create a text file with name is "<hhmmss>-<DDMMYYYY>.<username>.log", run bash in 1 minute, create 1 file each 5 seconds.
+What are the directories in the / file?
+1/2 day	
+
+
+User management	
+Config "adm1n" to be able to use "root" privileges without password.
+Setup password policy at least 8 characters, complexity required, password expiration on both
+Create user "d3v", group "d3v0p5" on both
+Configure newly created users so that they do not have the right to switch to other users.
+1/2 day	
+Clone VM.	
+Disable SSH to "adm1n" user.
+List VM names so they can be referred to by name.
+Clone the above virtual machine into 4 machines A, B, C, D.
+1/2 day	
+Networking	
+Change SSH port on VMs A, B, C, D to 7222, 6222, 5222, 4222 respectively.
+Setup SSH client using SuperPuTTY or mRemoteNG or VSCODE from host to each VM.
+Configure VMs so they can connect to each other, copy files between them via "VM's name" and "d3v" user with key pair.
+1/2 day	
+Install package
+
+and config application
+
+Install Tomcat server on machine A by using package, configure it as a service with "d3v" user
+Install MySQL 8.0 on machine B, configure it to be accessible from both internal and external sources.
+2 days
+
++ 1/2 day
+
+
+
+Process management	
+Use command to display process information/kill process, run background process
+Write a bash file using loop to print CPU, RAM, DISK information every 20 secs
+Write a program to check tomcat server every 2 minutes, if it down then start it
+Find process that run on port 3306, kill it then start it again
+1 day	
+
+
+Backup - Log - Crond	
+Setup log rotate for tomcat server
+Setup a job to run periodically to backup MySQL data every day
+1 day	
+
+
+Configure application	
+Configure Tomcat in A so that it can use MySQL in B (Refer: Tomcat JDBC Connection Pool, Link)
+Set up Nginx/php on machine C to connect to MySQL in D, show simple to-do item list web page (Refer: Link)
+2 days
+
++ 1/2 day
+
+
+
+OpenSSH	
+ 
+
+Using OpenSSH to forward defined ports (Optional)
+Using OpenSSH as a sock proxy (Optional)
+ 
+
+
+
+Network File System	
+ 
+
+Set up an NFS server and an NFS client. (Optional)
+Share a directory from the server with the client and access it from the client. (Optional)
+ 
+
+
+
+End Day:
+Subject: Linux Operating System seminar
+Time: 
+
+
+Output
+Install successfully a virtual machine Ubuntu OS on Virtual Box.
+Understand the configurations required when installing a VM 
+Create/delete, enable/disable, set user permissions, assign groups/shells to users, and manage passwords by command.
+List/understand file permissions, modify permissions of file/change file owner, create file link via command.
+Use command to display process information, kill, find process, run background process.
+Understand to systemd, run application as a service.
+Understand to log, backup, rotate log.
+Setup cronjobs to check service status and start them if it's stopping.
+Understand to networking concept & tools/command for networking in Linux OS.
+Use Vi/Nano to create/edit file & have basic shell programming skills.
