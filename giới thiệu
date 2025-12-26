@@ -1,0 +1,44 @@
+1.	Container
+-	A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.
+-	Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings.
+•	With a bare metal system, the operating system, binaries/libraries, and applications are installed and run directly onto the physical hardware.
+•	This is simple to understand and direct access to the hardware can be useful for specific configuration, but can lead to:
+
+
+•	Containers are similar to virtual machines in that they provide an isolated environment for installing and configuring binaries/libraries, but rather than virtualizing at the hardware layer containers use native linux features (cgroups + namespaces) to provide that isolation while still sharing the same kernel.
+
+
+•	This approach results in containers being more "lightweight" than virtual machines, but not providing the save level of isolation:
+	No dependency conflicts
+	Even better utilization efficiency
+	Small blast radius
+	Even faster startup and shutdown (seconds)
+	Even faster provisioning & decommissioning (seconds)
+	Lightweight enough to use in development!
+
+
+-	Note:
+•	Container != mini Virtual Machine
+•	Container là Process chạy trên hệ điều hành
+	Process này được giới hạn tài nguyên sử dụng trên OS (file, network, CPU, mem,…)
+	Container dừng và đóng như đóng process
+•	Image và container khác gì nhau?
+	Image là ứng dụng
+	Container là process khi chạy ứng dụng đó
+	Có thể có nhiều container chạy từ cùng một image
+	Image được lưu trên một kho chung gọi là ‘resgistry’
+
+•	docker container run –name Web –publish 8080:80 –d nginx
+	Kiểm tra xem image nginx có sẵn trên host chưa
+	Nếu chưa có thì  pull từ docker hub về
+	Tạo container tên Web dựa trên image nginx
+	Cấp địa chỉ IP cho container
+	Mở port 8080 trên host và NAT vào port 80 của container
+	Chạy container với các lệnh được định nghĩa trong image
+3.	OCI and docker
+-	The Open Container Initiative is an open governance structure for the express purpose of creating open industry standards around container formats and runtimes.
+-	Established in June 2015 by Docker and other leaders in the container industry, the OCI currently contains three specifications: 
+•	The Runtime Specification (runtime-spec), 
+•	The Image Specification (image-spec) 
+•	The Distribution Specification (distribution-spec). 
+-	The Runtime Specification outlines how to run a “file system bundle” that is unpacked on disk. At a high-level an OCI implementation would download an OCI Image then unpack that image into an OCI Runtime file system bundle. At this point the OCI Runtime Bundle would be run by an OCI Runtime.
